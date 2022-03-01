@@ -44,9 +44,15 @@ UI.prototype.clearFields = function () {
 };
 
 UI.prototype.deleteBook = function (paraent) {
-    paraent.parentNode.removeChild(paraent);
+    if (paraent.className === 'delete') {
+        paraent.parentElement.parentElement.remove();
+    }
+
 
 }
+// UI.prototype.deleteBook = function (paraent) {
+//     paraent.parentNode.removeChild(paraent);
+// }
 
 
 
@@ -69,16 +75,25 @@ document.getElementById('button').addEventListener("click", (e) => {
         ui.clearFields(book);
     }
 
-    let a = document.querySelectorAll('a');
-    a.forEach(element => {
-        element.addEventListener('click', () => {
-            let paraent = element.parentNode;
-            let paraentMain = paraent.parentNode;
-            console.log(paraentMain)
+    // let a = document.querySelectorAll('a');
+    // a.forEach(element => {
+    //     element.addEventListener('click', () => {
+    //         let paraent = element.parentNode;
+    //         let paraentMain = paraent.parentNode;
+    //         console.log(paraentMain)
 
-            ui.deleteBook(paraentMain);
+    //         ui.deleteBook(paraentMain);
 
-        })
-    })
+    //     })
+    // })
 
+})
+
+
+document.getElementById('book-list').addEventListener('click', (e) => {
+    const ui = new UI();
+    ui.deleteBook(e.target);
+    ui.showAlert('Book Deleted', "succes");
+
+    e.preventDefault()
 })
