@@ -41,3 +41,7 @@ form button{
 .list_title h3{
  width: 33%;
 }
+
+table td{
+    width: 33%;
+}
