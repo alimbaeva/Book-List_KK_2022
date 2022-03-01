@@ -3,6 +3,10 @@ https://alimbaeva.github.io/Book-List_KK_2022/index.html
 
 
 
+# ООП , класс и метод прототайп
+
+
+
 
 - **Описание задания**
     
