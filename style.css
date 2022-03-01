@@ -44,6 +44,13 @@ form button{
 
 table td{
     width: 33%;
+    font-size: 20px;
+    border-bottom: 2px solid rgb(80, 6, 6);
+}
+
+td .delete{
+    color: red;
+    font-weight: 900;
 }
 
 .succes, .error{
