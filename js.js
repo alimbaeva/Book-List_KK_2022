@@ -1,9 +1,4 @@
 
-// const button = document.querySelector('#button');
-
-// console.log(title.value)
-// console.log(author.value)
-// console.log(isbn.value)
 
 function Book(title, author, isbn) {
     this.title = title;
@@ -26,9 +21,20 @@ UI.prototype.addBookToList = function (book) {
     `;
 
     list.appendChild(row);
-    console.log(title.value)
-    console.log(author.value)
-    console.log(isbn.value)
+}
+
+UI.prototype.showAlert = function (msg, className) {
+    const div = document.createElement("div");
+    div.className = `alert ${className}`;
+
+    div.appendChild(document.createTextNode(msg));
+    const container = document.querySelector(".container");
+    const h1 = document.querySelector("h1");
+    container.insertBefore(div, h1);
+
+    setTimeout(function () {
+        document.querySelector(".alert").remove();
+    }, 3000)
 }
 
 UI.prototype.clearFields = function () {
@@ -36,6 +42,13 @@ UI.prototype.clearFields = function () {
     document.getElementById('author').value = '';
     document.getElementById('isbn').value = '';
 };
+
+UI.prototype.deleteBook = function (paraent) {
+    paraent.parentNode.removeChild(paraent);
+
+}
+
+
 
 document.getElementById('button').addEventListener("click", (e) => {
     e.preventDefault();
@@ -47,9 +60,25 @@ document.getElementById('button').addEventListener("click", (e) => {
 
     const book = new Book(title, author, isbn);
     const ui = new UI();
-    ui.addBookToList(book);
-    ui.clearFields(book);
 
+    if (title === '' || author === '' || isbn === '') {
+        ui.showAlert('Пожалуйста заполните поле', 'error')
+    } else {
+        ui.addBookToList(book);
+        ui.showAlert("Успешно добавлен", "succes")
+        ui.clearFields(book);
+    }
 
+    let a = document.querySelectorAll('a');
+    a.forEach(element => {
+        element.addEventListener('click', () => {
+            let paraent = element.parentNode;
+            let paraentMain = paraent.parentNode;
+            console.log(paraentMain)
 
-});
+            ui.deleteBook(paraentMain);
+
+        })
+    })
+
+})
